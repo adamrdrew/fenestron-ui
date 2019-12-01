@@ -42,5 +42,10 @@
   },
   "browserslist": [
     "electron >= 6.0"
-  ]
+  ],
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
 }
