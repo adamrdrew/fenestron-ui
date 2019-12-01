@@ -1,3 +1,8 @@
+# Fenestron UI
+A UI component framework inspired by Microsoft's XAML and UWP. Fenestron UI tries to provide a similar component set, layout, and styling to XAML and UWP. 
+
+Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10. If you are looking for a component framework to build web apps with then these probably aren't the droids you are looking for. If you are looking to build Windows 10 apps with Electron then we suggest you head on over to the Fenestron repo and get started there.
+
 <!-- vscode-markdown-toc -->
 * 1. [Layout and Sizing](#LayoutandSizing)
 * 2. [Components](#Components)
@@ -46,12 +51,7 @@
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc --># Fenestron UI
-A UI component framework inspired by Microsoft's XAML and UWP. Fenestron UI tries to provide a similar component set, layout, and styling to XAML and UWP. 
-
-Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10. If you are looking for a component framework to build web apps with then these probably aren't the droids you are looking for. If you are looking to build Windows 10 apps with Electron then we suggest you head on over to the Fenestron repo and get started there.
-
-
+<!-- /vscode-markdown-toc -->
 
 ##  1. <a name='LayoutandSizing'></a>Layout and Sizing
 Fenestron's layout and sizing systems are inspired by XAML's rather than HTML's. This means that containers size themselves to fill up the maximum amount of space available to them rather than sizing themselves based on their content. A `<div>` with a few words in it will only take up the space required for its content. In Fenestron a `BlurPanel` or `LayerPanel` etc will size itelf to occupy the entire spce it finds itself in. This means that for the vast majority of layouts you will not have to think about manually sizing or positioning elements. When you do need to size and position elements, such as with the grid templates in `Grid` or the foregroud panel layout of `LayerPanel` you will do so through props on the components rather than CSS. This approach makes constructing familiar UIs simple and largely hassle free. 
