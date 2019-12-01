@@ -1,11 +1,11 @@
 {
   "name": "fenestron",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vue-cli-service serve --target lib",
+    "build": "vue-cli-service build --target lib",
+    "lint": "vue-cli-service lint --target lib"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -38,7 +38,6 @@
     }
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "electron >= 6.0"
   ]
 }
