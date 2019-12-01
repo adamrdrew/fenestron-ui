@@ -61,7 +61,7 @@ If you are looking for a component framework to build web apps with then these p
 ## 0. <a name='Why'></a> Why Fenestron?
 We want to keep this README technical so [we have a document](docs/WhyFenestron.md) that explains in greater depth why you should consider Fenestron for your Electron app on Windows 10. Here are a couple high level bullet points:
 
-* Deliver *idiomatic* apps on Windows 10 that users will love. Go check out the reviews on the Windows Store of some Electron apps and then ask yourself "do I want to make my users that unhappy?"
+* Deliver *idiomatic* apps on Windows 10 that users will love. 
 * Helps you respect your users' preferences and choices while still using the technology you know and are invested in
 * Provides easy access to Windows 10 app integration features like light and dark theme support and the user's preferred accent color
 * Provides a collection of powerful UI components like TabView and GroupList that come with native Windows 10 behavior built in
