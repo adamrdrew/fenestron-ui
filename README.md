@@ -16,36 +16,36 @@ Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow
 		* 2.3.1. [Props](#Props-1)
 	* 2.4. [SplitView](#SplitView)
 		* 2.4.1. [Inline Example](#InlineExample)
-	* 2.5. [Overlay Example](#OverlayExample)
+		* 2.4.2. [Overlay Example](#OverlayExample)
+		* 2.4.3. [Props](#Props-1)
+	* 2.5. [PaneButton](#PaneButton)
 		* 2.5.1. [Props](#Props-1)
-* 3. [PaneButton](#PaneButton)
-		* 3.1. [Props](#Props-1)
-	* 3.1. [BlurPanel](#BlurPanel)
-	* 3.2. [LayerPanel](#LayerPanel)
-		* 3.2.1. [Example: Modal-Like](#Example:Modal-Like)
-		* 3.2.2. [Example: Top Panel](#Example:TopPanel)
-		* 3.2.3. [Example: Bottom Panel](#Example:BottomPanel)
-		* 3.2.4. [Example: Picture In Picture](#Example:PictureInPicture)
-		* 3.2.5. [Props](#Props-1)
-	* 3.3. [Pivot, PivotItem, & PivotContent](#PivotPivotItemPivotContent)
-		* 3.3.1. [Example:](#Example:)
-		* 3.3.2. [Props](#Props-1)
-	* 3.4. [ParallexPanel](#ParallexPanel)
-	* 3.5. [GroupedList](#GroupedList)
-		* 3.5.1. [Example:](#Example:-1)
-		* 3.5.2. [Example with Item Template](#ExamplewithItemTemplate)
-	* 3.6. [CommandBar, AppBarButton, & AppBarSeperator](#CommandBarAppBarButtonAppBarSeperator)
-		* 3.6.1. [Example:](#Example:-1)
-		* 3.6.2. [Props](#Props-1)
-		* 3.6.3. [CommandBar Slots](#CommandBarSlots)
-* 4. [TabView](#TabView)
-	* 4.1. [Data Model and Custom Item Properties](#DataModelandCustomItemProperties)
-	* 4.2. [Selected Item ID v-model](#SelectedItemIDv-model)
-	* 4.3. [Active vs Suspended Background Mode](#ActivevsSuspendedBackgroundMode)
-	* 4.4. [Content Slot and Slot Props](#ContentSlotandSlotProps)
-	* 4.5. [Item Mutability](#ItemMutability)
-	* 4.6. [Drag and Drop Reordering](#DragandDropReordering)
-* 5. [Tab Close Button](#TabCloseButton)
+	* 2.6. [BlurPanel](#BlurPanel)
+	* 2.7. [LayerPanel](#LayerPanel)
+		* 2.7.1. [Example: Modal-Like](#Example:Modal-Like)
+		* 2.7.2. [Example: Top Panel](#Example:TopPanel)
+		* 2.7.3. [Example: Bottom Panel](#Example:BottomPanel)
+		* 2.7.4. [Example: Picture In Picture](#Example:PictureInPicture)
+		* 2.7.5. [Props](#Props-1)
+	* 2.8. [Pivot, PivotItem, & PivotContent](#PivotPivotItemPivotContent)
+		* 2.8.1. [Example:](#Example:)
+		* 2.8.2. [Props](#Props-1)
+	* 2.9. [ParallexPanel](#ParallexPanel)
+	* 2.10. [GroupedList](#GroupedList)
+		* 2.10.1. [Example:](#Example:-1)
+		* 2.10.2. [Example with Item Template](#ExamplewithItemTemplate)
+	* 2.11. [CommandBar, AppBarButton, & AppBarSeperator](#CommandBarAppBarButtonAppBarSeperator)
+		* 2.11.1. [Example:](#Example:-1)
+		* 2.11.2. [Props](#Props-1)
+		* 2.11.3. [CommandBar Slots](#CommandBarSlots)
+	* 2.12. [TabView](#TabView)
+		* 2.12.1. [Data Model and Custom Item Properties](#DataModelandCustomItemProperties)
+		* 2.12.2. [Selected Item ID v-model](#SelectedItemIDv-model)
+		* 2.12.3. [Active vs Suspended Background Mode](#ActivevsSuspendedBackgroundMode)
+		* 2.12.4. [Content Slot and Slot Props](#ContentSlotandSlotProps)
+		* 2.12.5. [Item Mutability](#ItemMutability)
+		* 2.12.6. [Drag and Drop Reordering](#DragandDropReordering)
+		* 2.12.7. [Tab Close Button](#TabCloseButton)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -167,7 +167,7 @@ SplitView has two display modes: inline and overlay. Inline mode shows the conte
 ```
 ![SplitView Example](docs/images/splitViewExample.png?raw=true)
 
-###  2.5. <a name='OverlayExample'></a>Overlay Example
+####  2.4.2. <a name='OverlayExample'></a>Overlay Example
 ```vue
 <template lang="pug">
   SplitView(:pane-open="paneOpen", display-mode="overlay")
@@ -191,7 +191,7 @@ The `content` slot will scroll overflowed content.
 
 Setting the `title-bar-offset` prop to `true` will offset the content area by the height of the titlebar. This is implemented inconsistently in Microsoft's Windows 10 apps: some apps have a title bar offset from the content, and in others the two run into eachother. SplitView gives you the option to do what you want.
 
-####  2.5.1. <a name='Props-1'></a>Props
+####  2.4.3. <a name='Props-1'></a>Props
 | Name | Type | Default | Description
 |-|-|-|-
 | `open-width` | String | 23em | How wide the pane is when open
@@ -201,7 +201,7 @@ Setting the `title-bar-offset` prop to `true` will offset the content area by th
 | `title-bar-offset` | Boolean | `false` | Offset the top of the content area by the size of the TitleBar
 | `display-mode` | String | `"inline"` | `"inline"` puts pane and content side by side. `"overlay"` puts pane over content with acrylic.
 
-##  3. <a name='PaneButton'></a>PaneButton
+###  2.5. <a name='PaneButton'></a>PaneButton
 Button designed to work in the SplitView's Pane. Has an icon on the left and can be collapsed to only show the icon. Emits a `click` event.
 
 PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `navigate` to the name of a route will cause the button to perform a VueRouter navigate to the named route on click. A PaneButton with a `navigate` prop will still emit `click` when clicked.
@@ -219,7 +219,7 @@ PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `
 ```
 ![SplitView Example](docs/images/splitViewAccentColorExample.png?raw=true)
 
-####  3.1. <a name='Props-1'></a>Props
+####  2.5.1. <a name='Props-1'></a>Props
 | Name | Type | Default | Description
 |-|-|-|-
 | `icon`      | String | `"GlobalNavButton"` | The icon for the button. Appears on the left and remains even when the pane is closed. Takes a [Fabric Icon](https://developer.microsoft.com/en-us/fabric#/styles/web/icons) name with no prefixes.
@@ -230,7 +230,7 @@ PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `
 | `use-accent-color` | Boolean | `false` | If true the icon will use the system's accent color
 | `active` | Boolean | `false` | If true show a thin border on the left side using the system's accent color. Useful if indicating that the currently loaded page is the page for this button.
 
-###  3.1. <a name='BlurPanel'></a>BlurPanel
+###  2.6. <a name='BlurPanel'></a>BlurPanel
 An extended StackPanel that implements an acryllic look. Blurs the background of whatever is behind it and adds a subtle drop shadow. Has all of the same props as StackPanel because it inherits from it but extends it with a new `blurSize` prop.
 
 | Name | Type | Default | Description
@@ -257,7 +257,7 @@ LayerPanel(fg-height="5em", fg-top="0")
 
 ![BlurPanel Example](docs/images/blurPanelExample.png?raw=true)
 
-###  3.2. <a name='LayerPanel'></a>LayerPanel
+###  2.7. <a name='LayerPanel'></a>LayerPanel
 Allows you to arrange content in 2 layers: foreground and background. Useful when you want to display some content over some other content. Effective when combined with BlurPanel so that the background layer is seen through and blurred by the foreground layer.
 
 The background layer is essentially a pass-through; placing content in the background layer is like placing it in an empty 100%x100% div with no whitespace. There are no special props or options for the background layer. You probably want to put some more capable container in it such as a Grid or StackPanel.
@@ -268,7 +268,7 @@ Layers are added as named slots: `foreground` and `background`.
 
 LayerPanel is very flexible. You can create all kinds of different layouts with it, so multiple examples are shown.
 
-####  3.2.1. <a name='Example:Modal-Like'></a>Example: Modal-Like
+####  2.7.1. <a name='Example:Modal-Like'></a>Example: Modal-Like
 ```pug
 LayerPanel(fg-height="10em", fg-left="5em", fg-right="5em", fg-width="auto", fg-top="30%")
     template(v-slot:background)
@@ -279,7 +279,7 @@ LayerPanel(fg-height="10em", fg-left="5em", fg-right="5em", fg-width="auto", fg-
 ```
 ![LayerPanel Example](docs/images/layerPanelExampleOne.png?raw=true)
 
-####  3.2.2. <a name='Example:TopPanel'></a>Example: Top Panel
+####  2.7.2. <a name='Example:TopPanel'></a>Example: Top Panel
 ```pug
 LayerPanel(fg-height="5em")
     template(v-slot:background)
@@ -290,7 +290,7 @@ LayerPanel(fg-height="5em")
 ```
 ![LayerPanel Example](docs/images/layerPanelExampleTwo.png?raw=true)
 
-####  3.2.3. <a name='Example:BottomPanel'></a>Example: Bottom Panel
+####  2.7.3. <a name='Example:BottomPanel'></a>Example: Bottom Panel
 ```pug
 LayerPanel(fg-height="5em", fg-bottom="0", fg-top="auto")
     template(v-slot:background)
@@ -301,7 +301,7 @@ LayerPanel(fg-height="5em", fg-bottom="0", fg-top="auto")
 ```
 ![LayerPanel Example](docs/images/layerPanelExampleThree.png?raw=true)
 
-####  3.2.4. <a name='Example:PictureInPicture'></a>Example: Picture In Picture
+####  2.7.4. <a name='Example:PictureInPicture'></a>Example: Picture In Picture
 ```pug
 LayerPanel(fg-width="10em", fg-height="10em", fg-top="2em", fg-left="auto", fg-right="2em")
     template(v-slot:background)
@@ -312,7 +312,7 @@ LayerPanel(fg-width="10em", fg-height="10em", fg-top="2em", fg-left="auto", fg-r
 ```
 ![LayerPanel Example](docs/images/layerPanelExampleFour.png?raw=true)
 
-####  3.2.5. <a name='Props-1'></a>Props
+####  2.7.5. <a name='Props-1'></a>Props
 All LayerPanel props have the same type and work the same way so they're listed here as a list instead of a table. All of the `fg-*` props are strings and all accept valid CSS values for measurements, such as exact units, percentages, and even calc.
 * `fg-width`
 * `fg-height`
@@ -321,14 +321,14 @@ All LayerPanel props have the same type and work the same way so they're listed 
 * `fg-right`
 * `fg-left`
 
-###  3.3. <a name='PivotPivotItemPivotContent'></a>Pivot, PivotItem, & PivotContent
+###  2.8. <a name='PivotPivotItemPivotContent'></a>Pivot, PivotItem, & PivotContent
 Shows child content containers in a tabbed interface. Pivot works together with PivotItem and PivotContent to provide a complete tagged UI without any code.
 
 Pivot gives you a lot of functionality without requiring that you write any methods, but it requires that you nest and arrange your components correctly. All of the PivotItems need to go in the `items` slot and the PivotContents need to go in the `content` slot. Each PivotContent and PivotItem pair need to share the same `tab-id` prop value.
 
 We recommend that you next Page components in your PivotContents rather than build UI directly in them, but the example below shows both approaches.
 
-####  3.3.1. <a name='Example:'></a>Example:
+####  2.8.1. <a name='Example:'></a>Example:
 ```vue
 Pivot(default-tab-id="allEmail")
     template(#items)
@@ -345,7 +345,7 @@ Pivot(default-tab-id="allEmail")
 ```
 ![Pivot Example](docs/images/pivotExample.png?raw=true)
 
-####  3.3.2. <a name='Props-1'></a>Props
+####  2.8.2. <a name='Props-1'></a>Props
 | Component | Prop | Type | Default | Description
 |-|-|-|-|-|
 Pivot | `default-tab-id` | String | N/A | The ID of the default tab to show
@@ -353,7 +353,7 @@ PivotItem | `label` | String | N/A | The text to display in the tab button
 |PivotItem| `tab-id` | String | N/A | The ID of the tab to show. Maps to a corresponding PivotContent
 |PivotContent| `tab-id` | String | N/A | The ID of the tab content. Maps to corresponding PivotItem
 
-###  3.4. <a name='ParallexPanel'></a>ParallexPanel
+###  2.9. <a name='ParallexPanel'></a>ParallexPanel
 A panel with a background image and a parallax scrolling effect. A blur effect can optionally be applied to the background image.
 
 ```vue
@@ -375,7 +375,7 @@ export default {
 ```
 ![ParallaxPanel Example](docs/images/parallaxPanelExample.png?raw=true)
 
-###  3.5. <a name='GroupedList'></a>GroupedList
+###  2.10. <a name='GroupedList'></a>GroupedList
 Displays a list of items with headers. Both the headers and items are clickable. Clicking an item emits an `item-clicked` event. Clicking a header hides the items and shows a grid of just the headers. Clicking on a header in the grid returns to the list and scrolls to the items for the header clicked. 
 
 GroupedList needs to be provided with both the items and the headers, and doesn't do anything fancy like sort your headers or items, or determine headers from the data. It will display whatever you provide it in whatever order your provided it. This means you will likely need to do some work to get your list data in the right format for GroupedList but it ensures you have total control over the process and makes the headers very flexible. You could use numbers, letters, states or provinces, codes, or whatever else your data requires.
@@ -384,7 +384,7 @@ GroupedList uses transition animations for showing and hiding both the list and 
 
 Items are rendered via the default slot. The default slot has fallback content, meaning if you provide no slot template a simple list of headings will be rendered. Using the slot you can create any kind of custom UI you want for your list. The slot has `item` bound as a slot prop. This means that the item is in scope for your slot template so you can access any data on the items you want from your template.
 
-####  3.5.1. <a name='Example:-1'></a>Example: 
+####  2.10.1. <a name='Example:-1'></a>Example: 
 
 ```vue
 <template>
@@ -399,7 +399,7 @@ Items are rendered via the default slot. The default slot has fallback content, 
 |-      |-        |
 | ![GroupedListView Example 1](docs/images/groupedListViewExampleOne.png?raw=true) | ![GroupedListView Example 2](docs/images/groupedListViewExampleTwo.png?raw=true) |
 
-####  3.5.2. <a name='ExamplewithItemTemplate'></a>Example with Item Template
+####  2.10.2. <a name='ExamplewithItemTemplate'></a>Example with Item Template
 
 ```vue
 <template>
@@ -412,10 +412,10 @@ Items are rendered via the default slot. The default slot has fallback content, 
 ```
 ![GroupedListView Example 2](docs/images/groupedListViewExampleThree.png?raw=true) |
 
-###  3.6. <a name='CommandBarAppBarButtonAppBarSeperator'></a>CommandBar, AppBarButton, & AppBarSeperator
+###  2.11. <a name='CommandBarAppBarButtonAppBarSeperator'></a>CommandBar, AppBarButton, & AppBarSeperator
 CommandBar presents important and useful commands to the user. It is displayed as a bar filled with buttons that sticks to either the top or the bottom of the current page with the option to auto-hide. CommandBar exposes two named slots for primary and secondary commands. Primary commands are pulled to the left of the bar and secondary on the right. You could technically put any component in CommandBar's slots but Fenestron comes with components that are intended for use in CommandBar: AppBarButton and AppBarSeperator. Because these components are almost always used together they'll all be detailed in this section.
 
-####  3.6.1. <a name='Example:-1'></a>Example:
+####  2.11.1. <a name='Example:-1'></a>Example:
 The following example shows two CommandBar configurations: top of the screen with auto-hide and bottom of the screen withiout auto-hide. A Grid splits the view into 2 sections each with a different CommandBar.
 
 ```
@@ -450,7 +450,7 @@ It is recomended you use AppBarButton and AppBarSeperator for your CommandBar ch
 
 AppBarButton emits a `click` event when clicked.
 
-####  3.6.2. <a name='Props-1'></a>Props
+####  2.11.2. <a name='Props-1'></a>Props
 | Component | Prop | Type | Default | Description
 |-|-|-|-|-|
 CommandBar  | `bottom` | Boolean | `false` | Puts the command bar at the bottom of the container
@@ -461,16 +461,16 @@ AppBarButton | `icon` | String | `"BuildQueue"` | A icon class from Microsoft Fa
 AppBarButtons | `shot-title` | Boolean | `true` | If false the icon will be displayed without text under it
 
 
-####  3.6.3. <a name='CommandBarSlots'></a>CommandBar Slots
+####  2.11.3. <a name='CommandBarSlots'></a>CommandBar Slots
 * `primary-commands` - Slot for the most important buttons. Placed on the left side of the CommandBar
 * `secondary-commands` - Slot for the less important buttons. Placed on the right side of the CommandBar.
 
-##  4. <a name='TabView'></a>TabView
+###  2.12. <a name='TabView'></a>TabView
 Presents a tabbed interface for switching between multiple different instances of a child component. TabView is a powerful component that provides many tab features including tab close buttons, drag and drop reordering, and two different background tab modes.
 
 Due to TabView's richness its API is fairly complex. It presents many props and events and comes with a controller mixin. TabView also attempts to minimize the demands it puts on your data but at the cost of further configuraiton. If you wish to use TabView it is recommended that you read this entire TabView guide.
 
-###  4.1. <a name='DataModelandCustomItemProperties'></a>Data Model and Custom Item Properties
+####  2.12.1. <a name='DataModelandCustomItemProperties'></a>Data Model and Custom Item Properties
 TabView requires an array of objects to iterate over and create tabs for. The `item-source` prop is used for this array; we refer to the objects in this array as "items". By default TabView looks for the following properties of your items: `item.id`, `item.title`, `item.icon`. The id and title properties are required, icon is optional. 
 
 However, to minimize the demands placed on your data model you can configure TabView to use different property names. The `id-property`, `title-property`, and `icon-property` String props can be used to change the properties of your items TabView looks for:
@@ -495,7 +495,7 @@ export default {
 </script>
 ```
 
-###  4.2. <a name='SelectedItemIDv-model'></a>Selected Item ID v-model
+####  2.12.2. <a name='SelectedItemIDv-model'></a>Selected Item ID v-model
 TabView handles the work of showing and hiding the correct tab content based on the user's selection so you don't have to worry about doing that. However, it may still be useful for your code to know what item is active. You might want to send the selected ID to an API for recomendations of similar docs, or load associated data from another source by ID, etc. You can use `v-model` with TabView to keep a property on your component's data object updated with the ID of the selected item.
 
 ```vue
@@ -512,7 +512,7 @@ export default {
 </script>
 ```
 
-###  4.3. <a name='ActivevsSuspendedBackgroundMode'></a>Active vs Suspended Background Mode
+####  2.12.3. <a name='ActivevsSuspendedBackgroundMode'></a>Active vs Suspended Background Mode
 
 In active-background mode tab content for tabs that aren't currently selected continue to run in the background. They aren't visible, but they are still open and doing whatever it is they should be doing. Anything the application is allowed to do active-background tabs can also do. However, any code they are running that is looking for DOM elements or DOM changes may fail or act in unexpected ways.
 
@@ -522,7 +522,7 @@ Another important point to remember is that keys are required when using suspend
 
 A final background tab feature to be aware of is the `background` slot prop. You may want active background tabs but still want some features of your child component to turn off when in the beackground. You may want their state preserved and left open but you may want to suspend a long running operation for example. Your child component will be passed a `background` Boolean prop that you can watch and guard activity behind.
 
-###  4.4. <a name='ContentSlotandSlotProps'></a>Content Slot and Slot Props
+####  2.12.4. <a name='ContentSlotandSlotProps'></a>Content Slot and Slot Props
 TabView creates and manages the tabs but it also handles showing and hiding your tab content. Your tab content will be dislplayed in a child component that you provide. For example, if your TabView is used in a text editor you might have a child component that models and presents the UI for a single document. Your tab content child content must be slotted into the TabView component via the `tab-content` named slot.
 
 The `tab-content` slot provides some props to your child component. This is how your child component will get access to its item, have its unique ID key assigned, and be informed if it has been backgrounded:
@@ -537,14 +537,14 @@ TabView(:item-source="webpages", ...)
             :background="slotProps.background")
 </template>
 ```
-###  4.5. <a name='ItemMutability'></a>Item Mutability
+####  2.12.5. <a name='ItemMutability'></a>Item Mutability
 You may have noticed that our items are being handed down through props. This makes them immuatable in your child components. If you intend for your tab content children to be able to write to your items this could be a problem. There are a few different ways you can handle this.
 
 We don't recommend that the item source array contain your full content objects. For example, if you are writing a tabbed word processor we wouldn't advice that your item source array be filled with all of your documents. Rather we suggest you use the item source array as a collection of IDs and then have your child components load and manage the data they need.
 
 That said, for some smaller apps that may be overkill and you may want to use your item source array as your entire data model. For example, maybe in a todo or sticky note app. In such a case you can either implement custom events in your child components and have your parent listen for them, or similarly implement v-model in your child components and then `v-model="slotProps.item"` instead of `:item="slotProps.item"`.
 
-###  4.6. <a name='DragandDropReordering'></a>Drag and Drop Reordering
+####  2.12.6. <a name='DragandDropReordering'></a>Drag and Drop Reordering
 TabView provides drag and drop functionality for reordering tabs. Enabling drag and drop requires a combination of events and a mixin.
 
 Fenestron includes the `TabController` mixin. You'll need to include this mixin in the component that houses your TabView.
@@ -571,7 +571,7 @@ export default {
 ```
 To be clear, you don't need to implement your own `dragAndDrop` method - it is provided by `TabController`. You just need to wire up the method to the event hander and provide it the event and your item colleciton.
 
-##  5. <a name='TabCloseButton'></a>Tab Close Button
+####  2.12.7. <a name='TabCloseButton'></a>Tab Close Button
 Implementing tab close buttons is almost exactly like implementing drag and drop. You include the `TabController` mixin, enable `can-close`, and then wire up the `tabCloseClicked` method to the `tab-close-clicked` method, handing it `$event` and your item collection:
 ```vue
 <template>
