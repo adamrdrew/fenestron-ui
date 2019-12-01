@@ -4,10 +4,10 @@ A UI component framework inspired by Microsoft's XAML and UWP. Fenestron UI trie
 Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10. If you are looking for a component framework to build web apps with then these probably aren't the droids you are looking for. If you are looking to build Windows 10 apps with Electron then we suggest you head on over to the Fenestron repo.
 
 <!-- vscode-markdown-toc -->
-* 1. [Work In Progress](#WorkInProgress)
-* 2. [Getting Started](#GettingStarted)
-* 3. [Layout and Sizing](#LayoutandSizing)
-* 4. [Components](#Components)
+1. [Work In Progress](#WorkInProgress)
+2. [Getting Started](#GettingStarted)
+3. [Layout and Sizing](#LayoutandSizing)
+4. [Components](#Components)
 	* 4.1. [TitleBar](#TitleBar)
 		* 4.1.1. [Example](#Example)
 		* 4.1.2. [Props](#Props)
