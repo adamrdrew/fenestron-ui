@@ -1,0 +1,52 @@
+body {
+    background-color: white;
+}
+
+button:hover {
+    background-color: lightgray;
+    border-color: lightgray;
+}
+  
+button:active {
+    background-color: darkgrey;
+    border-color: darkgrey;
+}
+
+p {
+    color: black;
+}
+
+.theme-panel {
+    background-color: white;
+    color: black;
+}
+
+.theme-panel-secondary {
+    background-color: #eaeaea;
+    color: black;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+    background-color: #FFFFFF00;
+} 
+::-webkit-scrollbar-thumb {
+    background-color: #666666;
+    border-right-style: solid;
+    border-right-color: white;
+    border-right-width: 1px;
+}
+
+.divider-border-color {
+    border-color: #dedede;
+}
+
+.text-primary {
+    color: black;
+}
+.text-secondary {
+    color: #a3a3a3
+}
+.text-inverted {
+    color: white;
+}

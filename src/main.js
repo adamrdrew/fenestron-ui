@@ -1,5 +1,8 @@
 import Vue from 'vue'
-import App from './App.vue'
+
+require("@/styles/base.css")
+require("@/styles/transitions.css")
+require("@/components.js")
 
 Vue.config.productionTip = false
 

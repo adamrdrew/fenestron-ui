@@ -1,0 +1,24 @@
+button {
+    border-style: solid;
+    border-radius: 3px;
+    padding: 6px;
+}
+
+button:focus {
+    border-style: solid;
+    outline-style: none;
+    border-radius: 3px;
+    padding: 6px;
+}
+
+.frame {
+    height: 100%;
+    width: 100%;
+}
+
+img {
+    height: 100%;
+    height: 100%;
+}
+
+

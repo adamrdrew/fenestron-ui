@@ -1,0 +1,88 @@
+/* https://vuejs.org/v2/guide/transitions.html#Transition-Classes */
+.page-slide-up-enter-active {
+  transition: all .05s ease-out;
+}
+.page-slide-up-enter {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.page-slide-left-enter-active {
+  transition: all .05s ease-out;
+}
+.page-slide-left-enter {
+  transform: translateX(50px);
+  opacity: 0;
+}
+
+
+.zoom-out-enter-active {
+
+  transition: all .2s ease-out;
+}
+.zoom-out-enter {
+  transform: scale(3);
+  opacity: 0;
+}
+.zoom-out-enter-to {
+  transform: scale(1);
+  opacity: 1;
+}
+.zoom-out-leave-active {
+  transition: all .2s ease-out;
+}
+.zoom-out-leave {
+  transform: scale(1);
+  opacity: 1;
+}
+.zoom-out-leave-to {
+  transform: scale(3);
+  opacity: 0;
+}
+
+.zoom-in-enter-active {
+
+  transition: all .2s ease-out;
+}
+.zoom-in-enter {
+  transform: scale(.3);
+  opacity: 0;
+}
+.zoom-in-enter-to {
+  transform: scale(1);
+  opacity: 1;
+}
+.zoom-in-leave-active {
+  transition: all .2s ease-out;
+}
+.zoom-in-leave {
+  transform: scale(1);
+  opacity: 1;
+}
+.zoom-in-leave-to {
+  transform: scale(.3);
+  opacity: 0;
+}
+
+
+/*
+.zoom-in-enter-active {
+  transition: all 3s linear;
+}
+.zoom-in-leave-active {
+  transition: all 3s linear;
+}
+.zoom-in {
+  transform: scale(3);
+  opacity: 1;
+}
+.zoom-in-leave {
+  transform: scale(3);
+  opacity: 1;
+}
+*/
+
+.border-color-transition {
+  cursor: hand;
+  transition: border-color .5s ease-out;
+}
