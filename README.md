@@ -73,7 +73,29 @@ If you are interested in a longer-form treatment of the "why" question [we have 
 If this text is still here then Fenestron UI is an active work in progress not yet released or fit for use. You are welcome to kick the tires and read the sticker on the window but we're not quite ready to pull out of the lot yet. 
 
 ##  2. <a name='GettingStarted'></a>Getting Started
-We're not quite ready for that yet. Check back soon. 🐱‍💻
+This library is under active development and isn't yet avialable on NPM. The only reason to use it right now is to work on the library, so the current instalation advice is to checkout the repo and the add fenestron-ui as a dependcy of a test app for development purposes:
+
+```dos
+Development>git clone git@github.com:adamrdrew/fenestron-ui.git
+Development>cd exampleapp
+Development\exampleapp>npm install --save ../fenestron-ui
+```
+
+Then in your test app's entrypoint register FenestronUI. The following example includes an `electron` call to get the dark mode status and set the correct option in FenestronUI:
+
+```javascript
+//Get UI prefs
+import electron from "electron"
+store.state.theme.accentColor = electron.remote.systemPreferences.getAccentColor()
+store.state.theme.isDarkMode  = electron.remote.systemPreferences.isDarkMode()
+
+//Start FenestronUI
+import FenestronUI from "fenestron-ui"
+Vue.use(FenestronUI,{
+  darkMode: store.state.theme.isDarkMode
+})
+```
+From there you should now be able to serve out your Electron app and use FenestronUI components.
 
 ##  3. <a name='LayoutandSizing'></a>Layout and Sizing
 Fenestron's layout and sizing systems are inspired by XAML's rather than HTML's. This means that containers size themselves to fill up the maximum amount of space available to them rather than sizing themselves based on their content. A `<div>` with a few words in it will only take up the space required for its content. In Fenestron a `BlurPanel` or `LayerPanel` etc will size itelf to occupy the entire spce it finds itself in. This means that for the vast majority of layouts you will not have to think about manually sizing or positioning elements. When you do need to size and position elements, such as with the grid templates in `Grid` or the foregroud panel layout of `LayerPanel` you will do so through props on the components rather than CSS. This approach makes constructing familiar UIs simple and largely hassle free. 
