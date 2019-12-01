@@ -344,11 +344,11 @@ All LayerPanel props have the same type and work the same way so they're listed 
 * `fg-left`
 
 ###  4.8. <a name='PivotPivotItemPivotContent'></a>Pivot, PivotItem, & PivotContent
-Shows child content containers in a tabbed interface. Pivot works together with PivotItem and PivotContent to provide a complete tagged UI without any code.
+Shows child content containers in a tabbed interface. Pivot works together with PivotItem and PivotContent to provide a complete tabbed UI without any implementation code.
 
 Pivot gives you a lot of functionality without requiring that you write any methods, but it requires that you nest and arrange your components correctly. All of the PivotItems need to go in the `items` slot and the PivotContents need to go in the `content` slot. Each PivotContent and PivotItem pair need to share the same `tab-id` prop value.
 
-We recommend that you next Page components in your PivotContents rather than build UI directly in them, but the example below shows both approaches.
+We recommend that you nest components in your PivotContents rather than build UI directly in them, but the example below shows both approaches.
 
 ####  4.8.1. <a name='Example:'></a>Example:
 ```vue
@@ -490,12 +490,12 @@ AppBarButtons | `shot-title` | Boolean | `true` | If false the icon will be disp
 ###  4.12. <a name='TabView'></a>TabView
 Presents a tabbed interface for switching between multiple different instances of a child component. TabView is a powerful component that provides many tab features including tab close buttons, drag and drop reordering, and two different background tab modes.
 
-Due to TabView's richness its API is fairly complex. It presents many props and events and comes with a controller mixin. TabView also attempts to minimize the demands it puts on your data but at the cost of further configuraiton. If you wish to use TabView it is recommended that you read this entire TabView guide.
+Due to TabView's richness its API is fairly complex. It presents many props and events and comes with a controller mixin. TabView also attempts to minimize the demands it puts on your data but at the cost of further (optional)configuraiton. If you wish to use TabView it is recommended that you read this entire TabView guide.
 
 ####  4.12.1. <a name='DataModelandCustomItemProperties'></a>Data Model and Custom Item Properties
 TabView requires an array of objects to iterate over and create tabs for. The `item-source` prop is used for this array; we refer to the objects in this array as "items". By default TabView looks for the following properties of your items: `item.id`, `item.title`, `item.icon`. The id and title properties are required, icon is optional. 
 
-However, to minimize the demands placed on your data model you can configure TabView to use different property names. The `id-property`, `title-property`, and `icon-property` String props can be used to change the properties of your items TabView looks for:
+However, to minimize the demands placed on your data model you can configure TabView to use different property names. The `id-property`, `title-property`, and `icon-property` String props can be used to change the properties of your items that TabView accesses:
 
 ```vue
 <template lang="pug">
@@ -536,13 +536,13 @@ export default {
 
 ####  4.12.3. <a name='ActivevsSuspendedBackgroundMode'></a>Active vs Suspended Background Mode
 
-In active-background mode tab content for tabs that aren't currently selected continue to run in the background. They aren't visible, but they are still open and doing whatever it is they should be doing. Anything the application is allowed to do active-background tabs can also do. However, any code they are running that is looking for DOM elements or DOM changes may fail or act in unexpected ways.
+In active-background mode tab content for tabs that aren't currently selected continue to run in the background. They aren't visible, but they are still open and doing whatever it is they should be doing. Anything the application is allowed to do active-background tabs can also do. However, any code they are running that is looking for DOM elements or DOM changes may fail or act in unexpected ways (see the `background` slot prop for info on how to handle this.)
 
 In suspended-background mode tab content for tabs that aren't currently selected are removed from the component graph and deactived. They no longer execute and *any state they were holding is lost.* That last part is important. Anything that the component had in its local state that hasn't been comitted somewhere else will be lost. Because of this it is important make sure you save any content you may need to save before allowing the destroy operation to complete. You can either do this in the child component by implementing the `beforeDestroy` component life cycle hook, or in the parent component by handling the `before-destroy` event the child will emit just before it is destroyed.
 
 Another important point to remember is that keys are required when using suspended-background mode. Keys are always a good idea when working with iteration generated components, but when working with suspended-background tabs they are required. If you do not implement keys you may observe strange behavior such as the states of multiple components seeming to "mix" or "blend" together.
 
-A final background tab feature to be aware of is the `background` slot prop. You may want active background tabs but still want some features of your child component to turn off when in the beackground. You may want their state preserved and left open but you may want to suspend a long running operation for example. Your child component will be passed a `background` Boolean prop that you can watch and guard activity behind.
+A final background tab feature to be aware of is the `background` slot prop. You may want active background tabs but still want some features of your child component to turn off when in the background. You may want their state preserved and left open but you may want to suspend a long running operation for example. Your child component will be passed a `background` Boolean prop that you can guard activity behind.
 
 ####  4.12.4. <a name='ContentSlotandSlotProps'></a>Content Slot and Slot Props
 TabView creates and manages the tabs but it also handles showing and hiding your tab content. Your tab content will be dislplayed in a child component that you provide. For example, if your TabView is used in a text editor you might have a child component that models and presents the UI for a single document. Your tab content child content must be slotted into the TabView component via the `tab-content` named slot.
@@ -567,11 +567,11 @@ We don't recommend that the item source array contain your full content objects.
 That said, for some smaller apps that may be overkill and you may want to use your item source array as your entire data model. For example, maybe in a todo or sticky note app. In such a case you can either implement custom events in your child components and have your parent listen for them, or similarly implement v-model in your child components and then `v-model="slotProps.item"` instead of `:item="slotProps.item"`.
 
 ####  4.12.6. <a name='DragandDropReordering'></a>Drag and Drop Reordering
-TabView provides drag and drop functionality for reordering tabs. Enabling drag and drop requires a combination of events and a mixin.
+TabView provides drag and drop functionality for reordering tabs. Enabling drag and drop requires a combination of events and a mixin. Tab reordering updates your data model, so moving tabs around also moves aorund the order of entries in your array.
 
-Fenestron includes the `TabController` mixin. You'll need to include this mixin in the component that houses your TabView.
+Fenestron includes the `TabController` mixin. You'll need to include this mixin in the component that houses your TabView. `TabController` saves you the hassle of implementing the required reodering code for the drag event handler; it doesn't do anything special, just a splice with the correct indexes based on the data transfer from the drag event.
 
-Next, you'll need to make you TabView handle the `drag-and-drop` event and enable `can-drag`. The `drag-and-drop` event handler will call the `dragAndDrop` method provided by `TabController` and take two arguments, the event and your item colleciton. Along with that you need to enable drag and drop by setting `can-drag` to `true`. Example:
+Next, you'll need to make your TabView handle the `drag-and-drop` event and enable `can-drag`. The `drag-and-drop` event handler will call the `dragAndDrop` method provided by `TabController` and take two arguments, the event and your item colleciton. Along with that you need to enable drag and drop by setting `can-drag` to `true`. Example:
 
 ```vue
 <template>
