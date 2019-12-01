@@ -495,9 +495,6 @@ TabView provides drag and drop functionality for reordering tabs. Enabling drag 
 
 Fenestron includes the `TabController` mixin. You'll need to include this mixin in the component that houses your TabView.
 
-```
-
-```
 Next, you'll need to make you TabView handle the `drag-and-drop` event and enable `can-drag`. The `drag-and-drop` event handler will call the `dragAndDrop` method provided by `TabController` and take two arguments, the event and your item colleciton. Along with that you need to enable drag and drop by setting `can-drag` to `true`. Example:
 
 ```
