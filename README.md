@@ -48,7 +48,7 @@ Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow
 		* 4.12.5. [Item Mutability](#ItemMutability)
 		* 4.12.6. [Drag and Drop Reordering](#DragandDropReordering)
 		* 4.12.7. [Tab Close Button](#TabCloseButton)
-
+5. [Included Libraries](#IncludedLibraries)
 <!-- vscode-markdown-toc-config
 	numbering=true
 	autoSave=true
@@ -642,3 +642,9 @@ Grid(rows="1", columns="2", :column-definitions="['50%', '50%']")
             template(v-slot:tab-content="slotProps")
                 DemoTabContent(:item="slotProps.item", :key="slotProps.item.guid")
 ```
+
+##  5. <a name='IncludedLibraries'></a>Included Libraries
+Fenestron stands on the shoulders of many wonderful projects. Some of our dependencies are available to you, the library consumer, so they are listed here. You are free to use these in your own projects without including any additional dependencies:
+
+* [Vue Electron](https://www.npmjs.com/package/vue-electron) - Provides access to the Electron APIs on your Vue instance. 
+* [Office UI Fabric Core](https://www.npmjs.com/package/office-ui-fabric-core) - Provides us all of the benefit of Microsoft's design chops. Provides iconography and typography that give our apps a native look and feel.

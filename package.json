@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.4.3",
+    "office-ui-fabric-core": "^11.0.0",
     "vue": "^2.6.10",
-    "office-ui-fabric-core": "^11.0.0"
+    "vue-electron": "^1.0.6"
   },
   "devDependencies": {
     "electron": "^6.0.0",

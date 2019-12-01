@@ -1,5 +1,8 @@
 import Vue from 'vue'
 
+import VueElectron from 'vue-electron'
+Vue.use(VueElectron)
+
 import AppBarSeperator from '@/components/AppBarSeperator.vue'
 import AppBarButton from '@/components/AppBarButton.vue'
 import CommandBar from '@/components/CommandBar.vue'
