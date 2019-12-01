@@ -59,13 +59,15 @@ If you are looking for a component framework to build web apps with then these p
 <!-- /vscode-markdown-toc -->
 
 ## 0. <a name='Why'></a> Why Fenestron?
-We want to keep this README technical so [we have a document](docs/WhyFenestron.md) that explains in greater depth why you should consider Fenestron for your Electron app on Windows 10. Here are a couple high level bullet points:
+There are many reasons to consider Fenestron for your Windows 10 app. Here are a few:
 
 * Deliver *idiomatic* apps on Windows 10 that users will love. 
 * Helps you respect your users' preferences and choices while still using the technology you know and are invested in
 * Provides easy access to Windows 10 app integration features like light and dark theme support and the user's preferred accent color
-* Provides a collection of powerful UI components like TabView and GroupList that come with native Windows 10 behavior built in
+* Provides a collection of powerful UI components like TabView, Pivot, and GroupedListView that come with native Windows 10 behavior built in
 * Easy access to Fluent Design features such as Microsoft designed iconography and typeography and depth through subtle use of blur, transparency, and shadow
+
+If you are interested in a longer-form treatment of the "why" question [we have a document](docs/WhyFenestron.md) that goes into greater depth.
 
 ##  1. <a name='WorkInProgress'></a>Work In Progress
 If this text is still here then Fenestron UI is an active work in progress not yet released or fit for use. You are welcome to kick the tires and read the sticker on the window but we're not quite ready to pull out of the lot yet. 
