@@ -1,7 +1,9 @@
 {
-  "name": "fenestron",
+  "name": "fenestron-ui",
+  "description": "🗔 A UI component framework for building idiomatic Windows 10 apps with Vue and Electron. Part of the Fenestron Project.",
   "version": "0.0.1-alpha",
-  "private": true,
+  "license": "MIT",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve --target lib",
     "build": "vue-cli-service build --target lib src/main.js",

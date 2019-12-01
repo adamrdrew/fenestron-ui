@@ -1,7 +1,18 @@
 # Fenestron UI
-A UI component framework inspired by Microsoft's XAML and UWP. Fenestron UI tries to provide a similar component set, layout, and styling to XAML and UWP. 
+A Vue UI component framework inspired by Microsoft's XAML and UWP. 
 
-Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10. If you are looking for a component framework to build web apps with then these probably aren't the droids you are looking for. If you are looking to build Windows 10 apps with Electron then we suggest you head on over to the Fenestron repo.
+Fenestron UI is part of the Fenestron project. Fenestron helps developers build *idiomatic* Windows 10 apps with Electron and Vue. Idiomatic apps don't use native technologies but look and feel like they do.
+
+If you are looking for a component framework to build web apps with then these probably aren't the droids you are looking for. If you are looking to build Windows 10 apps with Electron then we suggest you head on over to the Fenestron repo.
+
+## Why Fenestron?
+We want to keep this README technical so [we have a document](docs/WhyFenestron.md) that explains in greater depth why you should consider Fenestron for your Electron app on Windows 10. Here are a couple high level bullet points:
+
+* Deliver *idiomatic* apps on Windows 10 that users will love. Go check out the reviews on the Windows Store of some Electron apps and then ask yourself "do I want to make my users that unhappy?"
+* Helps you respect your users' preferences and choices while still using the technology you know and are invested in
+* Provides easy access to Windows 10 app integration features like light and dark theme support and the user's preferred accent color
+* Provides a collection of powerful UI components like TabView and GroupList that come with native Windows 10 behavior built in
+* Easy access to Fluent Design features such as Microsoft designed iconography and typeography and depth through subtle use of blur, transparency, and shadow
 
 <!-- vscode-markdown-toc -->
 1. [Work In Progress](#WorkInProgress)
