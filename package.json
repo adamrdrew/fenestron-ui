@@ -9,15 +9,18 @@
   },
   "dependencies": {
     "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "office-ui-fabric-core": "^11.0.0"
   },
   "devDependencies": {
+    "electron": "^6.0.0",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "vue-cli-plugin-pug": "^1.0.7",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
