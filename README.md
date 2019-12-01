@@ -1,7 +1,59 @@
 # Fenestron
-A UI component framework inspired by Microsoft's XAML and UWP. Fenestron tries to provide a similar component set, layout, and styling to XAML and UWP. Fenestron doesn't attempt syntax compatibility but tries to work similarly. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10.
+A UI component framework inspired by Microsoft's XAML and UWP. Fenestron tries to provide a similar component set, layout, and styling to XAML and UWP. Fenestron doesn't attempt 1:1 syntax compatibility but tries to work similarly. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10.
 
 The trick is to combine Fenestron's layout components with Vuent's constrols and Office Fabric' styles. The patchwork combination of those three pieces provides a solid foundation for many types of UWP inspired UIs.
+
+## Helpers
+Fenestron provides some helper code to try and smooth-out some of the difficulties that arise from using Electron. 
+
+### CORS Proxy
+CORS is a web security system that blocks or allows requests to and from domains. It makes sense on the web but it is a useless pain on the desktop. Other desktop app development environments don't have to worry about CORS, but the render process in Chromium on Electron hasn't been changed to remove CORS. This means that if you attempt to access a REST API from your render process it will be blocked with a Cross Origin error. 
+
+There are a number of solutions to this problem, ranging from dangerous and fast to exhaustive and difficult. A good middle-ground solution is to use a proxy server in your main process. The Electron main process - the background process - is a Node app and isn't hampered by CORS. Instead of having your render process access REST APIs directly you can have the render process ask the main process to query the REST API and then hand the response from the main process to the render process.
+
+There are many ways to set up a CORS proxy. You can do it manually in using the `net` module, or using Express, etc. There is a very simple `cors-anywhere` module that does the work of setting up a proxy using the `http-proxy` module. Fenestron has `cors-anywhere` as a dependency and provides a simple `cors_proxy` module that will set `cors-anywhere` up for you.
+
+To use `cors_proxy` simply import it and then call it in your `background.js`:
+
+```javascript
+import cors_proxy from '@/zamel/proxy'
+cors_proxy()
+```
+
+By default the proxy will bind to `0.0.0.0:8982`.  You can change either the host or the port when you call `cors_proxy`:
+
+```javascript
+cors_proxy("localhost", "8080")
+```
+You'll see console output when the proxy is initialized letting you know it is set up and working.
+
+```
+INFO  Launching Electron...
+CORS Proxy Started on 0.0.0.0:8982
+```
+
+To use the proxy simply prepend all of your RESP API URLS with the URL for your proxy:
+
+```javascript
+methods: {
+        async getArtistInfo() {
+            var response = await fetch(this.proxyURL + this.queryURL)
+            var json = await response.json()
+            this.artistInfo = json
+        }
+    },
+    computed: {
+        queryURL() {
+            return `https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&titles=${this.selectedArtist.content}&format=json`
+        },
+        proxyURL() {
+            return "http://127.0.0.1:8982/"
+        }
+    }
+```
+It probably makes sense to put the proxy URL somewhere globally available to your app, like the store.
+
+Is this proxy usable in production? Yes, for most use cases. The `cors-anywhere` module is mature, has been around for a while, and is quite popular. Using the proxy is asnychronous on both processes so you wont be blocking anything during the requests. For most use cases this should be fine. However, doing the proxy request over HTTP between your processes does add a small amount of latency into the process. If you were writing an application that has critical performance requirements for its web requests - maybe to constantly synchronize state between client and server at real time - you may want to us the Express IPC system instead. That said, if you are writing an app like that what the heck are you doing with Fenestron? I mean, I'm flattered but...
 
 ## Layout and Sizing
 Fenestron's layout and sizing systems are inspired by XAML's rather than HTML's. This means that containers size themselves to fill up the maximum amount of space available to them rather than sizing themselves based on their content. A `<div>` with a few words in it will only take up the space required for its content. In Fenestron a `BlurPanel` or `LayerPanel` etc will size itelf to occupy the entire spce it finds itself in. This means that for the vast majority of layouts you will not have to think about manually sizing or positioning elements. When you do need to size and position elements, such as with the grid templates in `Grid` or the foregroud panel layout of `LayerPanel` you will do so through props on the components rather than CSS. This approach makes constructing familiar UIs simple and largely hassle free. 
@@ -35,7 +87,7 @@ To use TitleBar make sure `frame` is set to `false` in the window's `BrowserWind
   Grid
 </template>
 ```
-![TitleBar Example](images/titleBarExample.png)
+![TitleBar Example](docs/images/titleBarExample.png?raw=true)
 
 #### Props
 | Name | Type | Default | Description
@@ -58,7 +110,7 @@ Grid(rows="3" :row-definitions='["4em", "auto", "4em"]')
   div(style="background-color: purple;") Footer
 </template>
 ```
-![Grid Example](images/gridExample.png)
+![Grid Example](docs/images/gridExample.png?raw=true)
 
 #### Props
 | Name | Type | Default | Description
@@ -85,7 +137,7 @@ Grid(rows="3" :row-definitions='["4em", "auto", "4em"]')
   div(style="background-color: purple;") Footer
 </template>
 ```
-![StackPanel Example](images/stackPanelExample.png)
+![StackPanel Example](docs/images/stackPanelExample.png?raw=true)
 
 #### Props
 | Name | Type | Default | Description
@@ -115,7 +167,7 @@ SplitView has two display modes: inline and overlay. Inline mode shows the conte
       ...
 </template>
 ```
-![SplitView Example](images/splitViewExample.png)
+![SplitView Example](docs/images/splitViewExample.png?raw=true)
 
 ### Overlay Example
 ```pug
@@ -129,7 +181,7 @@ SplitView has two display modes: inline and overlay. Inline mode shows the conte
       ...
 </template>
 ```
-![SplitView Example](images/splitViewOverlayExample.png)
+![SplitView Example](docs/images/splitViewOverlayExample.png?raw=true)
 
 SplitView provides 2 named slots: `pane` and `content` for the left and right sides respectively. The pane can be opened and closed by mutating the `pane-open` prop. The open and closed sizes of the `pane` are controlled by the `open-width` and `compact-width` props, with defaults set to match Windows 10 defaults. 
 
@@ -167,7 +219,7 @@ PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `
       h1 Right
 </template>
 ```
-![SplitView Example](images/splitViewAccentColorExample.png)
+![SplitView Example](docs/images/splitViewAccentColorExample.png?raw=true)
 
 #### Props
 | Name | Type | Default | Description
@@ -205,7 +257,7 @@ LayerPanel(fg-height="5em", fg-top="0")
 </template>
 ```
 
-![BlurPanel Example](images/blurPanelExample.png)
+![BlurPanel Example](docs/images/blurPanelExample.png?raw=true)
 
 ### LayerPanel
 Allows you to arrange content in 2 layers: foreground and background. Useful when you want to display some content over some other content. Effective when combined with BlurPanel so that the background layer is seen through and blurred by the foreground layer.
@@ -227,7 +279,7 @@ LayerPanel(fg-height="10em", fg-left="5em", fg-right="5em", fg-width="auto", fg-
     template(v-slot:foreground)
         BlurPanel(rgb="30,30,30", :blur-size="3", :opacity="0.5") This is BlurPanel Content
 ```
-![LayerPanel Example](images/layerPanelExampleOne.png)
+![LayerPanel Example](docs/images/layerPanelExampleOne.png?raw=true)
 
 #### Example: Top Panel
 ```pug
@@ -238,7 +290,7 @@ LayerPanel(fg-height="5em")
     template(v-slot:foreground)
         BlurPanel(rgb="30,30,30", :blur-size="3", :opacity="0.5") This is BlurPanel Content
 ```
-![LayerPanel Example](images/layerPanelExampleTwo.png)
+![LayerPanel Example](docs/images/layerPanelExampleTwo.png?raw=true)
 
 #### Example: Bottom Panel
 ```pug
@@ -249,7 +301,7 @@ LayerPanel(fg-height="5em", fg-bottom="0", fg-top="auto")
     template(v-slot:foreground)
         BlurPanel(rgb="30,30,30", :blur-size="3", :opacity="0.5") This is BlurPanel Content
 ```
-![LayerPanel Example](images/layerPanelExampleThree.png)
+![LayerPanel Example](docs/images/layerPanelExampleThree.png?raw=true)
 
 #### Example: Picture In Picture
 ```pug
@@ -260,7 +312,7 @@ LayerPanel(fg-width="10em", fg-height="10em", fg-top="2em", fg-left="auto", fg-r
     template(v-slot:foreground)
         BlurPanel(rgb="30,30,30", :blur-size="3", :opacity="0.5") This is BlurPanel Content
 ```
-![LayerPanel Example](images/layerPanelExampleFour.png)
+![LayerPanel Example](docs/images/layerPanelExampleFour.png?raw=true)
 
 #### Props
 All LayerPanel props have the same type and work the same way so they're listed here as a list instead of a table. All of the `fg-*` props are strings and all accept valid CSS values for measurements, such as exact units, percentages, and even calc.
@@ -293,7 +345,7 @@ Pivot(default-tab-id="allEmail")
         PivotContent(tab-id="junkEmail")
             DemoPageOne
 ```
-![Pivot Example](images/pivotExample.png)
+![Pivot Example](docs/images/pivotExample.png?raw=true)
 
 #### Props
 | Component | Prop | Type | Default | Description
@@ -323,7 +375,7 @@ export default {
 }
 </script>
 ```
-![ParallaxPanel Example](images/parallaxPanelExample.png)
+![ParallaxPanel Example](docs/images/parallaxPanelExample.png?raw=true)
 
 ### GroupedList
 Displays a list of items with headers. Both the headers and items are clickable. Clicking an item emits an `item-clicked` event. Clicking a header hides the items and shows a grid of just the headers. Clicking on a header in the grid returns to the list and scrolls to the items for the header clicked. 
@@ -347,7 +399,7 @@ Items are rendered via the default slot. The default slot has fallback content, 
 
 | Items | Headers |
 |-      |-        |
-| ![GroupedListView Example 1](images/groupedListViewExampleOne.png) | ![GroupedListView Example 2](images/groupedListViewExampleTwo.png) |
+| ![GroupedListView Example 1](docs/images/groupedListViewExampleOne.png?raw=true) | ![GroupedListView Example 2](docs/images/groupedListViewExampleTwo.png?raw=true) |
 
 #### Example with Item Template
 
@@ -360,7 +412,7 @@ Items are rendered via the default slot. The default slot has fallback content, 
             div(style="border-style: solid; border-width: 1px; border-color: pink; color: white;") {{ slotProps.item.content }}
 <template>
 ```
-![GroupedListView Example 2](images/groupedListViewExampleThree.png) |
+![GroupedListView Example 2](docs/images/groupedListViewExampleThree.png?raw=true) |
 
 ### CommandBar, AppBarButton, & AppBarSeperator
 CommandBar presents important and useful commands to the user. It is displayed as a bar filled with buttons that sticks to either the top or the bottom of the current page with the option to auto-hide. CommandBar exposes two named slots for primary and secondary commands. Primary commands are pulled to the left of the bar and secondary on the right. You could technically put any component in CommandBar's slots but Fenestron comes with components that are intended for use in CommandBar: AppBarButton and AppBarSeperator. Because these components are almost always used together they'll all be detailed in this section.
@@ -388,7 +440,7 @@ Grid(rows="2", columns="1", :row-definitions='["50%","50%"]')
         | {{ artistInfo }}
 ```
 
-![CommandBar Example 2](images/commandBarExample.png)
+![CommandBar Example 2](docs/images/commandBarExample.png?raw=true)
 
 Notice that the top CommandBar in the example is collapsed - that is due to the auto-hide prop. If the user mouses-over the collapsed CommandBar it would expand to full size just like the bottom example. On mouse out it will collapse again after a delay. 
 
@@ -541,7 +593,7 @@ export default {
 </script>
 ```
 
-![TabView Example](images/tabVieExample.png)
+![TabView Example](docs/images/tabVieExample.png?raw=true)
 
 ```
 Grid(rows="1", columns="2", :column-definitions="['50%', '50%']")
@@ -568,5 +620,3 @@ Grid(rows="1", columns="2", :column-definitions="['50%', '50%']")
             template(v-slot:tab-content="slotProps")
                 DemoTabContent(:item="slotProps.item", :key="slotProps.item.guid")
 ```
-
-
