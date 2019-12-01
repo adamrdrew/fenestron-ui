@@ -71,21 +71,7 @@ We want to keep this README technical so [we have a document](docs/WhyFenestron.
 If this text is still here then Fenestron UI is an active work in progress not yet released or fit for use. You are welcome to kick the tires and read the sticker on the window but we're not quite ready to pull out of the lot yet. 
 
 ##  2. <a name='GettingStarted'></a>Getting Started
-The easiest way to get started is to use Fenestron to boostrap a new Electron app complete with Fenestron UI. If you are looking to learn Fenestron UI or start a new project that's the way to go.
-
-However, maybe you already have an Electron app and you want to move your front end to Fenestron UI. First, thank you for thinking about user experience and taking your users' choice of platform seriosly. That's awesome. You're awesome. In that case how you get started is going to depend on what state your Electron app is currently in. Fenestron UI is a library of VueJS components. If your Electron app is already using Vue then you are ready to go, simply install Fenestron UI and add it to your render process's entrypoint:
-
-```
-> npm install fenestron-ui
-```
-```javascript
-import Vue from 'vue'
-require('fenestron-ui')
-```
-
-From there on in it is a matter of chugging through and getting your UI moved over to Fenestron UI components.
-
-If your Electron app isn't using Vue however, then you've got some work to do before you can bring Fenestron UI in. We suggest checking out the Vue docs and getting started there. Once you have Vue set up and you've got your app working with that then you can come back and do the above.
+We're not quite ready for that yet. Check back soon. 🐱‍💻
 
 ##  3. <a name='LayoutandSizing'></a>Layout and Sizing
 Fenestron's layout and sizing systems are inspired by XAML's rather than HTML's. This means that containers size themselves to fill up the maximum amount of space available to them rather than sizing themselves based on their content. A `<div>` with a few words in it will only take up the space required for its content. In Fenestron a `BlurPanel` or `LayerPanel` etc will size itelf to occupy the entire spce it finds itself in. This means that for the vast majority of layouts you will not have to think about manually sizing or positioning elements. When you do need to size and position elements, such as with the grid templates in `Grid` or the foregroud panel layout of `LayerPanel` you will do so through props on the components rather than CSS. This approach makes constructing familiar UIs simple and largely hassle free. 
