@@ -78,7 +78,7 @@ This library is under active development and isn't yet avialable on NPM. The onl
 ```dos
 Development>git clone git@github.com:adamrdrew/fenestron-ui.git
 Development>cd exampleapp
-Development\exampleapp>npm install --save ../fenestron-ui
+Development\exampleapp>npm install --save file:../fenestron-ui
 ```
 
 Then in your test app's entrypoint register FenestronUI. The following example includes an `electron` call to get the dark mode status and set the correct option in FenestronUI:
@@ -96,6 +96,8 @@ Vue.use(FenestronUI,{
 })
 ```
 From there you should now be able to serve out your Electron app and use FenestronUI components.
+
+*Note: This method **will** reload your test app when you make changes to FenestronUI and you don't need to update.*
 
 ##  3. <a name='LayoutandSizing'></a>Layout and Sizing
 Fenestron's layout and sizing systems are inspired by XAML's rather than HTML's. This means that containers size themselves to fill up the maximum amount of space available to them rather than sizing themselves based on their content. A `<div>` with a few words in it will only take up the space required for its content. In Fenestron a `BlurPanel` or `LayerPanel` etc will size itelf to occupy the entire spce it finds itself in. This means that for the vast majority of layouts you will not have to think about manually sizing or positioning elements. When you do need to size and position elements, such as with the grid templates in `Grid` or the foregroud panel layout of `LayerPanel` you will do so through props on the components rather than CSS. This approach makes constructing familiar UIs simple and largely hassle free. 
