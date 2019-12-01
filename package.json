@@ -1,14 +1,22 @@
 {
   "name": "fenestron-ui",
   "description": "🗔 A UI component framework for building idiomatic Windows 10 apps with Vue and Electron. Part of the Fenestron Project.",
-  "version": "0.0.1-alpha",
+  "version": "0.0.2-alpha",
   "license": "MIT",
   "private": false,
+  "main": "./src/main.js",
   "scripts": {
-    "serve": "vue-cli-service serve --target lib",
-    "build": "vue-cli-service build --target lib src/main.js",
-    "lint": "vue-cli-service lint --target lib"
+    "serve": "vue-cli-service serve --target lib --name FenestronUI src/main.js",
+    "build": "vue-cli-service build --target lib --name FenestronUI src/main.js",
+    "lint": "vue-cli-service lint --target lib --name FenestronUI src/main.js"
   },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
     "core-js": "^3.4.3",
     "office-ui-fabric-core": "^11.0.0",
@@ -35,7 +43,10 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-debugger": "off",
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
@@ -47,5 +58,5 @@
     "plugins": {
       "autoprefixer": {}
     }
-  },
+  }
 }

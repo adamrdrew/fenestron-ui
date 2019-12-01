@@ -4,7 +4,7 @@ div(:style="[panelStyle, blurStyle]")
 </template>
 
 <script>
-import StackPanel from '@/components/StackPanel.vue'
+import StackPanel from './StackPanel.vue'
 export default {
     extends: StackPanel,
     props: {
