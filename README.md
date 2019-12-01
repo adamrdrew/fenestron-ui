@@ -13,7 +13,7 @@ Creates a window title bar that matches the Windows 10 UWP app style. Presents t
 
 The back button uses the browser engine's History system, just like a back button in a browser. Combined with Vue Router and a clean SPA app design this can do a great job emulating native back button behavior.
 
-To use TitleBar make sure `frame` is set to `false` in the window's `BrowserWindow` constructor. I also recommend you disable the in app menu bar:
+To use TitleBar make sure `frame` is set to `false` in the window's `BrowserWindow` constructor in your Electron app's main process setup code. I also recommend you disable the in app menu bar:
 
 ```javascript
   win = new BrowserWindow({ 
@@ -428,7 +428,11 @@ However, to minimize the demands placed on your data model you can configure Tab
 ```
 <template lang="pug">
 TabView(
-    :item-source="articles", id-property="guid",title-property="headline",icon-property="thumbnail" ...)
+    :item-source="articles", 
+    id-property="guid",
+    title-property="headline",
+    icon-property="thumbnail", 
+    ...)
 </template>
 <script>
 export default {
