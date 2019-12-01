@@ -1,59 +1,7 @@
-# Fenestron
-A UI component framework inspired by Microsoft's XAML and UWP. Fenestron tries to provide a similar component set, layout, and styling to XAML and UWP. Fenestron doesn't attempt 1:1 syntax compatibility but tries to work similarly. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10.
+# Fenestron UI
+A UI component framework inspired by Microsoft's XAML and UWP. Fenestron UI tries to provide a similar component set, layout, and styling to XAML and UWP. 
 
-The trick is to combine Fenestron's layout components with Vuent's constrols and Office Fabric' styles. The patchwork combination of those three pieces provides a solid foundation for many types of UWP inspired UIs.
-
-## Helpers
-Fenestron provides some helper code to try and smooth-out some of the difficulties that arise from using Electron. 
-
-### CORS Proxy
-CORS is a web security system that blocks or allows requests to and from domains. It makes sense on the web but it is a useless pain on the desktop. Other desktop app development environments don't have to worry about CORS, but the render process in Chromium on Electron hasn't been changed to remove CORS. This means that if you attempt to access a REST API from your render process it will be blocked with a Cross Origin error. 
-
-There are a number of solutions to this problem, ranging from dangerous and fast to exhaustive and difficult. A good middle-ground solution is to use a proxy server in your main process. The Electron main process - the background process - is a Node app and isn't hampered by CORS. Instead of having your render process access REST APIs directly you can have the render process ask the main process to query the REST API and then hand the response from the main process to the render process.
-
-There are many ways to set up a CORS proxy. You can do it manually in using the `net` module, or using Express, etc. There is a very simple `cors-anywhere` module that does the work of setting up a proxy using the `http-proxy` module. Fenestron has `cors-anywhere` as a dependency and provides a simple `cors_proxy` module that will set `cors-anywhere` up for you.
-
-To use `cors_proxy` simply import it and then call it in your `background.js`:
-
-```javascript
-import cors_proxy from '@/zamel/proxy'
-cors_proxy()
-```
-
-By default the proxy will bind to `0.0.0.0:8982`.  You can change either the host or the port when you call `cors_proxy`:
-
-```javascript
-cors_proxy("localhost", "8080")
-```
-You'll see console output when the proxy is initialized letting you know it is set up and working.
-
-```
-INFO  Launching Electron...
-CORS Proxy Started on 0.0.0.0:8982
-```
-
-To use the proxy simply prepend all of your RESP API URLS with the URL for your proxy:
-
-```javascript
-methods: {
-        async getArtistInfo() {
-            var response = await fetch(this.proxyURL + this.queryURL)
-            var json = await response.json()
-            this.artistInfo = json
-        }
-    },
-    computed: {
-        queryURL() {
-            return `https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&titles=${this.selectedArtist.content}&format=json`
-        },
-        proxyURL() {
-            return "http://127.0.0.1:8982/"
-        }
-    }
-```
-It probably makes sense to put the proxy URL somewhere globally available to your app, like the store.
-
-Is this proxy usable in production? Yes, for most use cases. The `cors-anywhere` module is mature, has been around for a while, and is quite popular. Using the proxy is asnychronous on both processes so you wont be blocking anything during the requests. For most use cases this should be fine. However, doing the proxy request over HTTP between your processes does add a small amount of latency into the process. If you were writing an application that has critical performance requirements for its web requests - maybe to constantly synchronize state between client and server at real time - you may want to us the Express IPC system instead. That said, if you are writing an app like that what the heck are you doing with Fenestron? I mean, I'm flattered but...
+Fenestron UI is part of the Fenestron project. The goal of Fenestron is to allow developers to create Electron apps that have a look and feel that is as close to native as possible on Windows 10. If you are looking for a component framework to build web apps with then these probably aren't the droids you are looking for. If you are looking to build Windows 10 apps with Electron then we suggest you head on over to the Fenestron repo and get started there.
 
 ## Layout and Sizing
 Fenestron's layout and sizing systems are inspired by XAML's rather than HTML's. This means that containers size themselves to fill up the maximum amount of space available to them rather than sizing themselves based on their content. A `<div>` with a few words in it will only take up the space required for its content. In Fenestron a `BlurPanel` or `LayerPanel` etc will size itelf to occupy the entire spce it finds itself in. This means that for the vast majority of layouts you will not have to think about manually sizing or positioning elements. When you do need to size and position elements, such as with the grid templates in `Grid` or the foregroud panel layout of `LayerPanel` you will do so through props on the components rather than CSS. This approach makes constructing familiar UIs simple and largely hassle free. 
