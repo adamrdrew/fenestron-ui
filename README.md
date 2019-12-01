@@ -28,7 +28,7 @@ To use TitleBar make sure `frame` is set to `false` in the window's `BrowserWind
 ```
 
 #### Example
-```
+```vue
 <template lang="pug">
 .frame
   TitleBar(:back-button="true", title="Title Bar Example")
@@ -73,7 +73,7 @@ Grid(rows="3" :row-definitions='["4em", "auto", "4em"]')
 ### StackPanel
 A panel that arranges items in row, horizontally or vertically. Has the ability to scroll, wrap, and to combine the two. Can be styled with a background color and an opacity.
 
-```pug
+```vue
 <template lang="pug">
 Grid(rows="3" :row-definitions='["4em", "auto", "4em"]')
   div(style="background-color: pink;") Header
@@ -104,7 +104,7 @@ Provides the familiar Windows 10 SplitView "side bar" seen in apps like Groove, 
 SplitView has two display modes: inline and overlay. Inline mode shows the content and pane next to each other with the content resizing and reflowing based on the pane being opened or closed. Overlay displays the pane over the content with the content size and flow never changing. Inline mode has a solid background color. Overlay mode implements acrylic, showing the content underneath and bluring it generously. Inline is the default.
 
 #### Inline Example
-```pug
+```vue
 <template lang="pug">
   SplitView(:pane-open="paneOpen")
     template(v-slot:pane)
@@ -118,7 +118,7 @@ SplitView has two display modes: inline and overlay. Inline mode shows the conte
 ![SplitView Example](docs/images/splitViewExample.png?raw=true)
 
 ### Overlay Example
-```pug
+```vue
 <template lang="pug">
   SplitView(:pane-open="paneOpen", display-mode="overlay")
     template(v-slot:pane)
@@ -156,7 +156,7 @@ Button designed to work in the SplitView's Pane. Has an icon on the left and can
 
 PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `navigate` to the name of a route will cause the button to perform a VueRouter navigate to the named route on click. A PaneButton with a `navigate` prop will still emit `click` when clicked.
 
-```pug
+```vue
 <template lang="pug">
   SplitView(:pane-open="paneOpen")
     template(v-slot:pane)
@@ -194,7 +194,7 @@ An extended StackPanel that implements an acryllic look. Blurs the background of
 | `rgb` | String | `255,255,255` | The background color for the panel, defined in RGB. Must be a string of RGB values, comma seperated.
 | `blur-size` | Number | `1` | The blur size in pixels
 
-```
+```vue
 <template lang="pug">
 LayerPanel(fg-height="5em", fg-top="0")
     template(v-slot:background)
@@ -306,7 +306,7 @@ PivotItem | `label` | String | N/A | The text to display in the tab button
 ### ParallexPanel
 A panel with a background image and a parallax scrolling effect. A blur effect can optionally be applied to the background image.
 
-```
+```vue
 <template lang="pug">
 Grid(rows="2" :row-definitions='["20em", "auto"]')
     ParallaxPanel(:background-image="image", :blur="true", blurSize="5px", )
@@ -425,7 +425,7 @@ TabView requires an array of objects to iterate over and create tabs for. The `i
 
 However, to minimize the demands placed on your data model you can configure TabView to use different property names. The `id-property`, `title-property`, and `icon-property` String props can be used to change the properties of your items TabView looks for:
 
-```
+```vue
 <template lang="pug">
 TabView(
     :item-source="articles", 
@@ -448,7 +448,7 @@ export default {
 ### Selected Item ID v-model
 TabView handles the work of showing and hiding the correct tab content based on the user's selection so you don't have to worry about doing that. However, it may still be useful for your code to know what item is active. You might want to send the selected ID to an API for recomendations of similar docs, or load associated data from another source by ID, etc. You can use `v-model` with TabView to keep a property on your component's data object updated with the ID of the selected item.
 
-```
+```vue
 <template lang="pug">
 TabView(:item-source="documents", v-model="activeDocumentID", ...)
 </template>
@@ -477,7 +477,7 @@ TabView creates and manages the tabs but it also handles showing and hiding your
 
 The `tab-content` slot provides some props to your child component. This is how your child component will get access to its item, have its unique ID key assigned, and be informed if it has been backgrounded:
 
-```
+```vue
 <template lang="pug">
 TabView(:item-source="webpages", ...)
     template(v-slot:tab-content="slotProps")
@@ -501,7 +501,7 @@ Fenestron includes the `TabController` mixin. You'll need to include this mixin 
 
 Next, you'll need to make you TabView handle the `drag-and-drop` event and enable `can-drag`. The `drag-and-drop` event handler will call the `dragAndDrop` method provided by `TabController` and take two arguments, the event and your item colleciton. Along with that you need to enable drag and drop by setting `can-drag` to `true`. Example:
 
-```
+```vue
 <template>
 TabView(
     :item-source="webpages",
@@ -523,7 +523,7 @@ To be clear, you don't need to implement your own `dragAndDrop` method - it is p
 
 ## Tab Close Button
 Implementing tab close buttons is almost exactly like implementing drag and drop. You include the `TabController` mixin, enable `can-close`, and then wire up the `tabCloseClicked` method to the `tab-close-clicked` method, handing it `$event` and your item collection:
-```
+```vue
 <template>
 TabView(
     :item-source="webpages",
