@@ -195,18 +195,17 @@ Grid(rows="3" :row-definitions='["4em", "auto", "4em"]')
 | `rgb` | String | `255,255,255` | The background color for the panel, defined in RGB. Must be a string of RGB values, comma seperated.
 
 ###  4.4. <a name='SplitView'></a>SplitView
-Provides the familiar Windows 10 SplitView "side bar" seen in apps like Groove, Mail, Todo, etc. 
+Provides the familiar Windows 10 SplitView "side bar" seen in apps like Groove, Mail, Todo, etc. SplitView comes with a "hamburger" toggle button already wired-up.
 
 SplitView has two display modes: inline and overlay. Inline mode shows the content and pane next to each other with the content resizing and reflowing based on the pane being opened or closed. Overlay displays the pane over the content with the content size and flow never changing. Inline mode has a solid background color. Overlay mode implements acrylic, showing the content underneath and bluring it generously. Inline is the default.
 
 ####  4.4.1. <a name='InlineExample'></a>Inline Example
 ```vue
 <template lang="pug">
-  SplitView(:pane-open="paneOpen")
-    template(v-slot:pane)
-      PaneButton(:pane-open="paneOpen", icon="GlobalNavButton", @click="paneOpen = !paneOpen", style="padding-top: 2em;")
-      PaneButton(:pane-open="paneOpen", icon="DietPlanNotebook", title="Notebooks")
-      PaneButton(:pane-open="paneOpen", icon="BulkUpload", title="Lists")
+  SplitView
+    template(v-slot:pane="slotProps")
+      PaneButton(:pane-open="slotProps.paneOpen", icon="DietPlanNotebook", title="Notebooks")
+      PaneButton(:pane-open="slotProps.paneOpen", icon="BulkUpload", title="Lists")
     template(v-slot:content)
       ...
 </template>
@@ -216,36 +215,37 @@ SplitView has two display modes: inline and overlay. Inline mode shows the conte
 ####  4.4.2. <a name='OverlayExample'></a>Overlay Example
 ```vue
 <template lang="pug">
-  SplitView(:pane-open="paneOpen", display-mode="overlay")
+  SplitView(display-mode="overlay")
     template(v-slot:pane)
-      PaneButton(:pane-open="paneOpen", icon="GlobalNavButton", @click="paneOpen = !paneOpen", style="padding-top: 2em;")
-      PaneButton(:pane-open="paneOpen", icon="DietPlanNotebook", title="Notebooks")
-      PaneButton(:pane-open="paneOpen", icon="BulkUpload", title="Lists")
+      PaneButton(:pane-open="slotProps.paneOpen", icon="DietPlanNotebook", title="Notebooks")
+      PaneButton(:pane-open="slotProps.paneOpen", icon="BulkUpload", title="Lists")
     template(v-slot:content)
       ...
 </template>
 ```
 ![SplitView Example](docs/images/splitViewOverlayExample.png?raw=true)
 
-SplitView provides 2 named slots: `pane` and `content` for the left and right sides respectively. The pane can be opened and closed by mutating the `pane-open` prop. The open and closed sizes of the `pane` are controlled by the `open-width` and `compact-width` props, with defaults set to match Windows 10 defaults. 
+SplitView provides 2 named slots: `pane` and `content` for the left and right sides respectively. The `pane` slot exposes the pane's open/closed status via the `pane-open` slot prop. The open and closed sizes of the `pane` are controlled by the `open-width` and `compact-width` props, with defaults set to match Windows 10 defaults. 
 
-The `content` slot can be used for the rest of the content in your app. For a SPA experience putting `router-view` in the `content` slot works very well. 
+The `content` slot can be used for the rest of the content in your app. For a SPA experience putting `router-view` in the `content` slot works very well. The `pane-open` slot prop is also passed to `content` just in case you need it to adjust something else in your UI. 
 
 The `pane` slot works best with controls designed for it such as `PaneButton`.
 
 The `content` slot will scroll overflowed content. 
 
-Setting the `title-bar-offset` prop to `true` will offset the content area by the height of the titlebar. This is implemented inconsistently in Microsoft's Windows 10 apps: some apps have a title bar offset from the content, and in others the two run into eachother. SplitView gives you the option to do what you want.
+Setting the `title-bar-offset` prop to `true` will offset the content and pane areas by the height of the titlebar. This is implemented inconsistently in Microsoft's Windows 10 apps: some apps have a title bar offset from the content, and in others the two run into eachother. SplitView gives you the option to do what you want.
+
+The "hamburger" toggle button can be disabled with the `toggle-button` boolean prop, if your app calls for that.
 
 ####  4.4.3. <a name='Props-1'></a>Props
 | Name | Type | Default | Description
 |-|-|-|-
 | `open-width` | String | 23em | How wide the pane is when open
 | `closed-width` | String | 3.2em | How wide the pane is when closed
-| `pane-open` | Boolean | `true` | Controls whether the pane is open or closed
 | `pane-background` | String | `#e1e1e1` | Pane background color
-| `title-bar-offset` | Boolean | `false` | Offset the top of the content area by the size of the TitleBar
+| `title-bar-offset` | Boolean | `false` | Offset the top by the size of the TitleBar
 | `display-mode` | String | `"inline"` | `"inline"` puts pane and content side by side. `"overlay"` puts pane over content with acrylic.
+| `toggle-button` | Boolean | `true` | If `false` the toggle button will be disabled
 
 ###  4.5. <a name='PaneButton'></a>PaneButton
 Button designed to work in the SplitView's Pane. Has an icon on the left and can be collapsed to only show the icon. Emits a `click` event.

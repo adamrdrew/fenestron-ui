@@ -1,15 +1,20 @@
 <template lang="pug">
 div(:style="gridStyle")
     div.theme-panel-secondary(:style="paneStyle")
-        slot(name="pane")
+        PaneButton(v-if="toggleButton", :pane-open="paneOpen", icon="GlobalNavButton", @click="toggle", title="")
+        slot(name="pane", :paneOpen="paneOpen")
     div(:style="contentStyle")
-        slot(name="content")
+        slot(name="content", :paneOpen="paneOpen")
 </template>
 
 <script>
 
 export default {
     props: {
+        toggleButton: {
+            type: Boolean,
+            default: true
+        },
         openWidth: {
             type: String,
             default: "23em"
@@ -17,10 +22,6 @@ export default {
         compactWidth: {
             type: String,
             default: "3.2em"
-        },
-        paneOpen: {
-            type: Boolean,
-            default: true
         },
         paneBackground: {
             type: String,
@@ -37,6 +38,7 @@ export default {
 
     },
     data: () => ({
+        paneOpen: true
     }),
     methods: {
         toggle() {
@@ -86,6 +88,10 @@ export default {
                 gridRowEnd: 2,
                 zIndex: 50,
                 filter: "drop-shadow(1px 0px 5px rgba(0,0,0,0.2))",
+            }
+            if ( this.titleBarOffset) {
+                style["margin-top"] = "30px"
+                style["height"] = "calc(100% - 30px)" 
             }
             if ( this.displayMode == "overlay" ) {
                 style["backdrop-filter"] = "blur(8px)"
