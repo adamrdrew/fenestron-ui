@@ -74,7 +74,7 @@ export default {
             }
 
             if ( this.titleBarOffset) {
-                style["margin-top"] = "30px"
+                style["padding-top"] = "30px"
                 style["height"] = "calc(100% - 30px)" 
             }
 
