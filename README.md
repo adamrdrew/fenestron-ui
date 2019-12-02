@@ -216,7 +216,7 @@ SplitView has two display modes: inline and overlay. Inline mode shows the conte
 ```vue
 <template lang="pug">
   SplitView(display-mode="overlay")
-    template(v-slot:pane)
+    template(v-slot:pane="slotProps")
       PaneButton(:pane-open="slotProps.paneOpen", icon="DietPlanNotebook", title="Notebooks")
       PaneButton(:pane-open="slotProps.paneOpen", icon="BulkUpload", title="Lists")
     template(v-slot:content)
@@ -250,15 +250,14 @@ The "hamburger" toggle button can be disabled with the `toggle-button` boolean p
 ###  4.5. <a name='PaneButton'></a>PaneButton
 Button designed to work in the SplitView's Pane. Has an icon on the left and can be collapsed to only show the icon. Emits a `click` event.
 
-PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `navigate` to the name of a route will cause the button to perform a VueRouter navigate to the named route on click. A PaneButton with a `navigate` prop will still emit `click` when clicked.
+PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `navigate` to the name of a route will cause the button to perform a VueRouter navigate to the named route on click. When the `navigate` prop is in use there's no need to manually set the `active` prop - the button will activate itself when the active route name matches its `navigate` prop. A PaneButton with a `navigate` prop will still emit `click` when clicked.
 
 ```vue
 <template lang="pug">
-  SplitView(:pane-open="paneOpen")
-    template(v-slot:pane)
-      PaneButton(:pane-open="paneOpen", icon="GlobalNavButton", @click="paneOpen = !paneOpen", style="padding-top: 2em;" title="")
-      PaneButton(:use-accent-color="true", :pane-open="paneOpen", icon="DietPlanNotebook", title="Demo Page 1", navigate="pageOne")
-      PaneButton(:pane-open="paneOpen", icon="BulkUpload", title="Demo Page 2", navigate="pageTwo")
+  SplitView
+    template(v-slot:pane="slotProps")
+      PaneButton(:use-accent-color="true", :pane-open="slotProps.paneOpen", icon="DietPlanNotebook", title="Demo Page 1", navigate="pageOne")
+      PaneButton(:pane-open="slotProps.paneOpen", icon="BulkUpload", title="Demo Page 2", navigate="pageTwo")
     template(v-slot:content)
       h1 Right
 </template>
@@ -272,9 +271,9 @@ PaneButton provides easy VueRouter navigation via the `navigate` prop. Setting `
 | `title`     | String | `"Button"` | The label to the right of the icon. Hidden when the pane is closed.
 | `pane-open` | Boolean| `true` | Sets whether the pane that contains the button is open or closed. When open the icon and the title are visible; when closed just the icon.
 | `highlight` | Boolean| `false` | Background is highlighted on mouseover
-| `navigate`  | String | `NoNavigationConfigured` | Must be the `name` property of a route. If set to a value other than the default will navgiate to the provded route name.
+| `navigate`  | String | `NoNavigationConfigured` | Must be the `name` property of a route. If set to a value other than the default will navgiate to the provded route name. If configured the PaneButton will have its `active` state set automatically.
 | `use-accent-color` | Boolean | `false` | If true the icon will use the system's accent color
-| `active` | Boolean | `false` | If true show a thin border on the left side using the system's accent color. Useful if indicating that the currently loaded page is the page for this button.
+| `active` | Boolean | `false` | If true show a thin border on the left side using the system's accent color. Useful if indicating that the currently loaded page is the page for this button. You do *not* need to set this manually if you are using `navigate`
 
 ###  4.6. <a name='BlurPanel'></a>BlurPanel
 An extended StackPanel that implements an acryllic look. Blurs the background of whatever is behind it and adds a subtle drop shadow. Has all of the same props as StackPanel because it inherits from it but extends it with a new `blurSize` prop.

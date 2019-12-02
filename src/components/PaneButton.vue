@@ -45,6 +45,10 @@ export default {
         }
     },
     computed: {
+        smartActive() {
+            if ( this.navigate === "NoNavigationConfigured") return this.active
+            return this.$route.name === this.navigate
+        },
         iconClass() {
             return {
                 [`ms-Icon--${this.icon}`]: true
@@ -57,7 +61,7 @@ export default {
             return `#${this.$store.state.theme.accentColor}`
         },
         borderColor() {
-            return this.active ? this.accentColor : "transparent"
+            return this.smartActive ? this.accentColor : "transparent"
         },
         buttonStyle() {
             return {
