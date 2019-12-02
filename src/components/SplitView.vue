@@ -90,7 +90,7 @@ export default {
                 filter: "drop-shadow(1px 0px 5px rgba(0,0,0,0.2))",
             }
             if ( this.titleBarOffset) {
-                style["margin-top"] = "30px"
+                style["padding-top"] = "30px"
                 style["height"] = "calc(100% - 30px)" 
             }
             if ( this.displayMode == "overlay" ) {
