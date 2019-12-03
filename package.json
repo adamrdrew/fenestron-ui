@@ -1,5 +1,10 @@
 {
   "name": "fenestron-ui",
+  "author": {
+    "email": "adamrdrew@live.com",
+    "name": "Adam Drew",
+    "url": "http://www.propertyandmethod.com"
+  },
   "description": "🗔 A UI component framework for building idiomatic Windows 10 apps with Vue and Electron. Part of the Fenestron Project.",
   "version": "0.0.2-alpha",
   "license": "MIT",
