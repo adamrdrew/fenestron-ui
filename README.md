@@ -1,3 +1,6 @@
+<p align="center"><img src="docs/images/fenestronLogo.jpg" alt="Fenestron logo"></a></p>
+
+
 # Fenestron UI
 A Vue UI component framework inspired by Microsoft's XAML and UWP. 
 
